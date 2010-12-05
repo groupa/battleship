@@ -1,5 +1,13 @@
 class ComputerShot {
 
+
+	/**The values for the cells in the map are the following:
+	 * 9 - useless cell, was thrown out initially after generating a 'checkers' map, will never shoot on it
+	 * 0 - regular cell, have never shoot it
+	 * 1 - regular cell, have shot it and missed
+	 * 2 - regular cell, have shot it and hit the target
+	 * 3 - regular cell, have shot it, hit the target and hit the whole ship
+
 	/**Define counter variables for the 'for' loops: */
 	int i,j;
 
