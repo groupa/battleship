@@ -5,7 +5,8 @@ class Main {
 public static void main (String[] args) {
 
 	Map enemyMap = new Map(10,10);
+	Map checkeredMap;
 	ComputerShot computerShot = new ComputerShot ();
-	computerShot.shotCheckerSteps(enemyMap);
+	checkeredMap = computerShot.shotCheckerSteps(enemyMap);
 }
 }
