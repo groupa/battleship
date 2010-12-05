@@ -15,6 +15,7 @@ class ComputerShot {
 
 
 
+	/**Generate a map that is 'checkered' - each 2nd cell is excluded (the map is still 10x10, but each 2nd cell has a value of 9) */
 	Map shotCheckerSteps(Map enemyMap) {
 		/**Take each uneven row of a 2-d array: */
 		for (i=0; i < enemyMap.GetMap().length; i++) {
@@ -49,6 +50,8 @@ class ComputerShot {
 		return enemyMap;
 	}
 
+
+	/**The actual 'shooting' method: tries to shoot around the lastShot if it was successful, otherwise shoots cell by cell through a checkered map: */
 	Shot checkForPreviousHits (Map enemyMap, Shot lastShot) {
 
 		/**Check for the last shot, If there was a hit, then try to shoot around this previous cell */
@@ -145,11 +148,11 @@ class ComputerShot {
 		}
 
 
-		/**A completely random shot on a checkered map: */
+		/**A cell by cell shot on a checkered map: */
 		else {
 
-		for (i=0; i < enemyMap.GetMap().length; i++) {
-			for (j=0; j < enemyMap.GetMap()[i].length; j++) {
+		for (i=1; i < enemyMap.GetMap().length - 1; i++) {
+			for (j=1; j < enemyMap.GetMap()[i].length -1; j++) {
 
 				if (enemyMap.getCell(i,j) == 10) {
 					System.out.println("Computer: The previous shot was unsuccessful: " + move.getX() + ", " + move.getY());
