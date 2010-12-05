@@ -13,10 +13,10 @@ class ComputerShot {
 
 
 
-Map shotCheckerSteps(Map enemyMap) {
-		/**Take each row of a 2d array: */
+	Map shotCheckerSteps(Map enemyMap) {
+		/**Take each uneven row of a 2-d array: */
 		for (i=0; i < enemyMap.GetMap().length; i++) {
-			/**Take each 2nd element of this row (a checkers map): */
+			/**Take each uneven element of this row (a checkers map): */
 			for (j=0; j < enemyMap.GetMap()[i].length; j = j + 2) {
 
 				enemyMap.setCell(i,j+1,9);
@@ -26,12 +26,37 @@ Map shotCheckerSteps(Map enemyMap) {
 			}
 
 		}
+		/**[EVEN] Take each even row of a 2-d array: */
+		for (i=0; i < enemyMap.GetMap().length; i = i + 2) {
+			/**Take each uneven element of this row (a checkers map): */
+			for (j=0; j < enemyMap.GetMap()[i].length; j = j + 2) {
+
+				enemyMap.setCell(i,j+1,1);
+				enemyMap.setCell(i,j,9);
+
+
+			}
+
+		}
 		for (i=0; i < enemyMap.GetMap().length; i++) {
 			for (j=0; j < enemyMap.GetMap()[i].length; j++) {
-System.out.print(" " + enemyMap.getCell(i,j));
+				System.out.print(" " + enemyMap.getCell(i,j));
 			}
-		System.out.println("");
+			System.out.println("");
 		}
 		return enemyMap;
+	}
+
+	void checkForPreviousHits (Map enemyMap) {
+		for (i=0; i < enemyMap.GetMap().length; i++) {
+			for (j=0; j < enemyMap.GetMap()[i].length; j++) {
+				if (enemyMap.getCell(i,j) == 2) {
+					if (enemyMap.getCell(i,j+2) == 2) {
+					}
+
+				}
+			}
+		}
+
 	}
 }
