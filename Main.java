@@ -12,6 +12,14 @@ public static void main (String[] args) {
 	/**Test a shot: */
 	checkeredMap = computerShot.shotCheckerSteps(enemyMap);
 
+//Check the random shooting:
+	checkeredMap.setCell(5,5,9);
+	computerShot.checkForPreviousHits(checkeredMap, lastShot);
+	//Check the random shooting:
+	checkeredMap.setCell(5,5,10);
+	computerShot.checkForPreviousHits(checkeredMap, lastShot);
+	
+
 	//Test the shooting if the last successful shot is present //
 	//upper cell:
 	checkeredMap.setCell(5,5,2);
@@ -28,6 +36,11 @@ public static void main (String[] args) {
 	checkeredMap.setCell(5,5,2);
 	checkeredMap.setCell(6,5,2);
 	computerShot.checkForPreviousHits(checkeredMap, lastShot);
+	//Check the random shooting:
+	checkeredMap.setCell(5,5,9);
+	//Check the random shooting:
+	checkeredMap.setCell(5,5,10);
+	
 	
 	
 
