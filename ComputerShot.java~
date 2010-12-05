@@ -16,7 +16,7 @@ class ComputerShot {
 			for (j=0; j < enemyMap.GetMap()[i].length; j++) {
 System.out.print(" " + enemyMap.getCell(i,j));
 			}
-		}
 		System.out.println("");
+		}
 	}
 }
