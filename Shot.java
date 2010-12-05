@@ -18,5 +18,26 @@ public class Shot {
         Y = y;
     }
 
+    int getX ()
+    {
+	    return X;
+    }
+
+    int getY ()
+    {
+	    return Y;
+    }
+
+    void setX (int x)
+    {
+	    X = x;
+    }
+
+void setY (int y)
+{
+	Y = y;
+}
+
+
 
 }
