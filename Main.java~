@@ -7,11 +7,29 @@ public static void main (String[] args) {
 	Map enemyMap = new Map(10,10);
 	Map checkeredMap;
 	ComputerShot computerShot = new ComputerShot ();
+	Shot lastShot = new Shot (5,5);
 
 	/**Test a shot: */
 	checkeredMap = computerShot.shotCheckerSteps(enemyMap);
-	checkeredMap.setCell(5,0,0);
-	computerShot.checkForPreviousHits(checkeredMap);
+
+	//Test the shooting if the last successful shot is present //
+	//left X cell:
+	checkeredMap.setCell(5,5,2);
+	computerShot.checkForPreviousHits(checkeredMap, lastShot);
+	//upper Y cell:
+	checkeredMap.setCell(5,5,2);
+	checkeredMap.setCell(5,4,2);
+	computerShot.checkForPreviousHits(checkeredMap, lastShot);
+	//right X cell:
+	checkeredMap.setCell(5,5,2);
+	checkeredMap.setCell(4,5,2);
+	computerShot.checkForPreviousHits(checkeredMap, lastShot);
+	//lower Y cell:
+	checkeredMap.setCell(5,5,2);
+	checkeredMap.setCell(5,6,2);
+	computerShot.checkForPreviousHits(checkeredMap, lastShot);
+	
+	
 
 }
 }

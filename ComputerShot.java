@@ -10,7 +10,8 @@ class ComputerShot {
 
 	/**Define counter variables for the 'for' loops: */
 	int i,j;
-	Shot move;
+	/**Set up a 'move' variable that computer enemy will return - it holds coordinates of computer's shot*/
+	Shot move = new Shot(0,0);
 
 
 
@@ -50,50 +51,76 @@ class ComputerShot {
 
 	Shot checkForPreviousHits (Map enemyMap, Shot lastShot) {
 
-				/**Check for the last shot, If there was a hit, then try to shoot around this previous cell */
-				if (enemyMap.getCell(lastShot.getX(), lastShot.getY()) == 2) {
-					if (lastShot.getX() >= 1) {
-						if (enemyMap.getCell(lastShot.getX() - 1, lastShot.getY()) >= 9) 
-						{
-							move.setX(lastShot.getX() - 1);
-							move.setY(lastShot.getY());
-					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
-							return move;
-						}
-					}
-					else if (lastShot.getY() >= 1) {
-						if (enemyMap.getCell(lastShot.getX(), lastShot.getY() - 1) >= 9) 
-						{
-							move.setX(lastShot.getX());
-							move.setY(lastShot.getY() - 1);
-					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
-							return move;
-						}
-					}
-					else if (lastShot.getX() <= 8) {
-						if (enemyMap.getCell(lastShot.getX() + 1, lastShot.getY()) >= 9) 
-						{
-							move.setX(lastShot.getX() + 1);
-							move.setY(lastShot.getY());
-					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
-							return move;
-						}
-					}
-					else if (lastShot.getY() >= 1) {
-						if (enemyMap.getCell(lastShot.getX(), lastShot.getY() + 1) >= 9) 
-						{
-							move.setX(lastShot.getX());
-							move.setY(lastShot.getY() + 1);
-					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
-							return move;
-						}
-					}
+		/**Check for the last shot, If there was a hit, then try to shoot around this previous cell */
+		if (enemyMap.getCell(lastShot.getX(), lastShot.getY()) == 2) {
+			System.out.println("Computer: The last shot was successful: " + lastShot.getX() + ", " + lastShot.getY());
+			if (lastShot.getX() >= 1) {
+				/**Check the upper cell: */
+				if (enemyMap.getCell(lastShot.getX() - 1, lastShot.getY()) >= 9) 
 
+					/**Draw a current map for the computer (where it shoot already and where he has not): */
 
+					System.out.println("Computer: here is my current enemy map (what I know about my enemy):");
+
+				for (i=0; i < enemyMap.GetMap().length; i++) {
+					for (j=0; j < enemyMap.GetMap()[i].length; j++) {
+						System.out.print(" " + enemyMap.getCell(i,j));
+					}
+					System.out.println("");
 				}
 
 
-				/**A completely random shot on a checkered map: */
+				System.out.println("Computer: Here is a neighbour cell of the last successful shot cell and I have never shoot it before: " + (lastShot.getX() - 1)  + ", " + lastShot.getY());
+				{
+					move.setX(lastShot.getX() - 1);
+					move.setY(lastShot.getY());
+					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
+
+
+
+					return move;
+				}
+			}
+			else if (lastShot.getY() >= 1) {
+				/**Check the left cell: */
+				if (enemyMap.getCell(lastShot.getX(), lastShot.getY() - 1) >= 9) 
+
+					System.out.println("Computer: Here is a neighbour cell of the last successful shot cell and I have never shoot it before: " + (lastShot.getX())  + ", " + (lastShot.getY() -1));
+				{
+					move.setX(lastShot.getX());
+					move.setY(lastShot.getY() - 1);
+					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
+					return move;
+				}
+			}
+			else if (lastShot.getX() <= 8) {
+				/**Check the lower cell: */
+				if (enemyMap.getCell(lastShot.getX() + 1, lastShot.getY()) >= 9) 
+					System.out.println("Computer: Here is a neighbour cell of the last successful shot cell and I have never shoot it before: " + (lastShot.getX() +1)  + ", " + lastShot.getY());
+				{
+					move.setX(lastShot.getX() + 1);
+					move.setY(lastShot.getY());
+					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
+					return move;
+				}
+			}
+			else if (lastShot.getY() >= 1) {
+				/**Check the right cell: */
+				System.out.println("Computer: Here is a neighbour cell of the last successful shot cell and I have never shoot it before: " + lastShot.getX()  + ", " + (lastShot.getY() +1));
+				if (enemyMap.getCell(lastShot.getX(), lastShot.getY() + 1) >= 9) 
+				{
+					move.setX(lastShot.getX());
+					move.setY(lastShot.getY() + 1);
+					System.out.println("The computer made a shot: " + move.getX() + ", " + move.getY());
+					return move;
+				}
+			}
+
+
+		}
+
+
+		/**A completely random shot on a checkered map: */
 
 		for (i=0; i < enemyMap.GetMap().length; i++) {
 			for (j=0; j < enemyMap.GetMap()[i].length; j++) {
