@@ -1,0 +1,12 @@
+This is the code for looping the music:
+
+while (true) {
+		new AudioPlayer("sounds/game.wav").start();
+		try {
+			Thread.currentThread().sleep(76000);
+		}
+		catch (Exception e) {}
+	     }
+
+It needs to be put at the end of a method i think. Amir will be working on it
+as well, but maybe you can try to solve it too.
