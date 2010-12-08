@@ -10,3 +10,10 @@ while (true) {
 
 It needs to be put at the end of a method i think. Amir will be working on it
 as well, but maybe you can try to solve it too.
+
+
+Notes 2010-12-08
+
+Updated the BackgroundPanel class and ScreenDisplayer class.
+Now contains codes for displaying lose/win screen, a return to menu button
+for those screens and a new custom cursor.

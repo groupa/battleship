@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
+import java.lang.*;
 import javax.imageio.ImageIO;
 import javax.swing.event.*;
 import javax.swing.*;
@@ -18,7 +18,7 @@ import javax.swing.*;
  */
 
 public class BackgroundPanel extends JFrame {
-
+	
 	BattleBoard shipPlacer = new BattleBoard();
 	
 	//Textfields and textareas for input and output
@@ -122,18 +122,24 @@ public class BackgroundPanel extends JFrame {
 	protected JLabel MediumInput;
 	protected JLabel Start;
 	protected JLabel Cancel;
+	//Animations
 	protected JLabel smallXplsn;
 	protected JLabel bigXplsn;
 	protected JLabel missAni;
 	protected BufferedImage smallXplsnBuff;
 	protected BufferedImage bigXplsnBuff;
 	protected BufferedImage missAniBuff;
+	//Win/Lose
+	protected JLabel winGame;
+	protected JLabel loseGame;
+	protected JLabel mainMenu;
+	
 	protected JLayeredPane layeredPane;
 	private JFrame frame;
 
 	//constructor
 	public BackgroundPanel() {
-
+		
 		//Frame and container for the labels
 		setupImages();
 		frame = new JFrame("Battleship");
@@ -144,6 +150,12 @@ public class BackgroundPanel extends JFrame {
 			}
 		});
 		Container contentPane = frame.getContentPane();
+		
+		//Set custom cursor
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = toolkit.getImage("img/cursor_25_white.png");
+		Cursor cursor = toolkit.createCustomCursor(image, new Point(0,0), "Target");
+		contentPane.setCursor(cursor);
 
 		//Layered pane, to be able to display labels on top of each other
 		layeredPane = new JLayeredPane();
@@ -237,9 +249,14 @@ public class BackgroundPanel extends JFrame {
 		layeredPane.add(verifyPassword, new Integer(3));
 		layeredPane.add(ip, new Integer(3));
 		layeredPane.add(serverName, new Integer(3));
+		//Animations
 		layeredPane.add(smallXplsn, new Integer(5));
 		layeredPane.add(bigXplsn, new Integer(5));
 		layeredPane.add(missAni, new Integer(5));
+		//Win/lose
+		layeredPane.add(winGame, new Integer(3));
+		layeredPane.add(loseGame, new Integer(3));
+		layeredPane.add(mainMenu, new Integer(3));
 	
 		contentPane.add(layeredPane);
 
@@ -738,5 +755,21 @@ public class BackgroundPanel extends JFrame {
 		serverName.setForeground(new Color(255, 255, 255));
 		serverName.setBorder(null);
 		serverName.setEditable(true);
+		
+		//Win/Lose game
+		image = new ImageIcon("img/youwin.png");
+		winGame = new JLabel(image);
+		winGame.setBounds(118, 350, image.getIconWidth(), image.getIconHeight());
+		winGame.setVisible(false);
+		
+		image = new ImageIcon("img/youlose.png");
+		loseGame = new JLabel(image);
+		loseGame.setBounds(97, 350, image.getIconWidth(), image.getIconHeight());
+		loseGame.setVisible(false);
+		
+		image = new ImageIcon("img/mainmenu.png");
+		mainMenu = new JLabel(image);
+		mainMenu.setBounds(178, 350, image.getIconWidth(), image.getIconHeight());
+		mainMenu.setVisible(false);
 	}
 } 
