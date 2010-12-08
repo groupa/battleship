@@ -58,6 +58,9 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 		InstructionsSmallText.setVisible(true);
 		HighscoreText.setVisible(true);
 		ExitGameText.setVisible(true);
+		winGame.setVisible(false);
+		loseGame.setVisible(false);
+		mainMenu.setVisible(false);
 		//false
 		whatIsHit.setVisible(false);
 		whatIsMiss.setVisible(false);
@@ -331,6 +334,31 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 		Start.setVisible(false);
 		Cancel.setVisible(false);
 	}
+	
+	public void displayFinished(int i) {
+		emptyArrays();
+		//true
+		if (i == 0)
+			winGame.setVisible(true);
+		else 
+			loseGame.setVisible(true);
+		mainMenu.setVisible(true);
+		//false
+		board1Label.setVisible(false);
+		board2Label.setVisible(false);
+		StarshipBattleTextLabel.setVisible(false);
+		enemyBoardText.setVisible(false);
+		myBoardText.setVisible(false);
+		returnToMain.setVisible(false);
+		ship1.setVisible(false);
+		ship2.setVisible(false);
+		ship3.setVisible(false);
+		ship4.setVisible(false);
+		ship5.setVisible(false);
+		gameErrors.setVisible(false);
+		whatIsHit.setVisible(false);
+		whatIsMiss.setVisible(false);
+	}
 
 	/* This method must be called at each iteration of the game play loop.
 	   This method updates the graphic 20frames per second
@@ -530,6 +558,9 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 		if (layeredPane.findComponentAt(e.getX(), e.getY()) == returnToMain) {
 			returnToMain.setIcon(new ImageIcon("img/return to main menu push.png"));
 		}
+		if (layeredPane.findComponentAt(e.getX(), e.getY()) == mainMenu) {
+			mainMenu.setIcon(new ImageIcon("img/mainmenupush.png"));
+		}
 		displayCurrentScreen();
 	}
 
@@ -659,18 +690,18 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 			Cancel.setIcon(new ImageIcon("img/cancel.png"));
 		}
 		if (layeredPane.findComponentAt(e.getX(), e.getY()) == returnToMain) {
-			for (int i = 0; i < hits.size(); i++) {
-				hits.get(i).setVisible(false);
-			}
-			for (int i = 0; i < misses.size(); i++) {
-				misses.get(i).setVisible(false);
-			}
-			hits.clear();
-			misses.clear();
+			emptyArrays();
 			currentScreen = 1;
 		}
 		if (layeredPane.findComponentAt(e.getX(), e.getY()) != returnToMain) {
 			returnToMain.setIcon(new ImageIcon("img/return to main menu.png"));
+		}
+		
+		if (layeredPane.findComponentAt(e.getX(), e.getY()) == mainMenu) {
+			currentScreen = 1;
+		}
+		if (layeredPane.findComponentAt(e.getX(), e.getY()) != mainMenu) {
+			mainMenu.setIcon(new ImageIcon("img/mainmenu.png"));
 		}
 
 		if (layeredPane.findComponentAt(e.getX(), e.getY()) == back) {
@@ -823,6 +854,12 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 		if (layeredPane.findComponentAt(e.getX(), e.getY()) == returnToMain) {
 			returnToMain.setIcon(new ImageIcon("img/return to main menu holdover.png"));
 		}
+		if (layeredPane.findComponentAt(e.getX(), e.getY()) != mainMenu) {
+			mainMenu.setIcon(new ImageIcon("img/mainmenu.png"));
+		}	
+		if (layeredPane.findComponentAt(e.getX(), e.getY()) == mainMenu) {
+			mainMenu.setIcon(new ImageIcon("img/mainmenuholdover.png"));
+		}
 		displayCurrentScreen();	
 	}
 
@@ -910,5 +947,16 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 				}
 			}
 		}
+	}
+	
+	private void emptyArrays () {
+		for (int i = 0; i < hits.size(); i++) {
+			hits.get(i).setVisible(false);
+		}
+		for (int i = 0; i < misses.size(); i++) {
+			misses.get(i).setVisible(false);
+		}
+		hits.clear();
+		misses.clear();
 	}
 }
