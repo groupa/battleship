@@ -11,23 +11,25 @@ import java.net.Socket;
  */
 
 public class ConnectionHandler extends Thread {
-
+	
+	private boolean dbg;
 	private Socket socket;
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 
 	/**
 	 * Initiate input and output object to prepare it for sending and receiving
-	 * over the network
+	 * over the network and make a thread 
 	 * 
-	 * @param s
+	 * @param socket
 	 *            The established connection between server and client
 	 * 
 	 */
 
-	public ConnectionHandler(Socket s) {
+	public ConnectionHandler(Socket socket) {
+		dbg = true;
 		try {
-			socket = s;
+			socket = socket;
 			input = new ObjectInputStream(socket.getInputStream());
 			output = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
@@ -36,6 +38,9 @@ public class ConnectionHandler extends Thread {
 
 		Thread connection = new Thread(this);
 		connection.start();
+		if(dbg){
+			System.out.println("the connectionhandler thread starts successfully");
+		}
 	}
 
 	/**
@@ -49,6 +54,9 @@ public class ConnectionHandler extends Thread {
 			output.writeObject(message);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		if(dbg){
+			System.out.println("the message send successfully   Connectionhandler.java - sendMessage()");
 		}
 	}
 

@@ -14,6 +14,7 @@ public class Server {
 
 	private static ArrayList<ConnectionHandler> connections;
 	private ServerSocket server;
+	private boolean dbg;
 
 	/**
 	 * @param args
@@ -29,8 +30,9 @@ public class Server {
 	 */
 
 	public Server() {
+		dbg = true;
 		try {
-			server = new ServerSocket(9999);
+			server = new ServerSocket(7777);
 			connections = new ArrayList<ConnectionHandler>();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -49,6 +51,11 @@ public class Server {
 				Socket s = server.accept();
 				ConnectionHandler obj = new ConnectionHandler(s);
 				connections.add(obj);
+				if (dbg) {
+					System.out.println("connection established and making a" +
+									" new thread as type of ConnectionHandler and add it to array list" +
+									"Server.java - checkconnection()");
+				}
 			}
 
 		} catch (IOException e) {
@@ -71,7 +78,9 @@ public class Server {
 	 *            specific message that must send to other clients
 	 */
 	public synchronized static void noticeAll(String message) {
-
+		/*
+		 * retrieve each threads from arraylist and call sendMessage() to update each of them
+		 */
 		for (int i = 0; i < connections.size(); i++) {
 			ConnectionHandler ref = connections.get(i);
 			ref.sendMessage("Send TO all :" + message);
