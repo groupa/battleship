@@ -21,7 +21,9 @@ public class BackgroundPanel extends JFrame {
 	
 	BattleBoard shipPlacer = new BattleBoard();
 	
-	//Textfields and textareas for input and output
+	/**
+	 * Textfields and textareas for input and output
+	 */
 	JTextField username = new JTextField("Username");
 	JPasswordField password = new JPasswordField("Password");
 	JTextField newUsername = new JTextField("Username");
@@ -37,15 +39,15 @@ public class BackgroundPanel extends JFrame {
 	JTextField getServerName = new JTextField("");
 	JTextField gameErrors = new JTextField("");
 	
-	/* 
+	/**
 	 * Arraylists to store hit and miss JLabels. This is to avoid creating to many
 	 * Jlabels for hits and misses
 	 */
 	protected ArrayList<JLabel> hits = new ArrayList<JLabel>();
 	protected ArrayList<JLabel> misses = new ArrayList<JLabel>();
-	
+	//Println on/off boolean
+	protected boolean dBg = true;
 	//Integer to keep track of which screen is currently displayed. Used for toggling labels on and off
-	protected int currentScreen = 1;
 	//The labels
 	//background
 	protected JLabel backgroundLabel;
@@ -140,7 +142,10 @@ public class BackgroundPanel extends JFrame {
 	//constructor
 	public BackgroundPanel() {
 		
-		//Frame and container for the labels
+		/**
+		 * Frame and container for the labels
+		 * pictures are set as labels.
+		 */
 		setupImages();
 		frame = new JFrame("Battleship");
 		frame.setResizable(false);
@@ -154,7 +159,7 @@ public class BackgroundPanel extends JFrame {
 		//Set custom cursor
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = toolkit.getImage("img/cursor_25_white.png");
-		Cursor cursor = toolkit.createCustomCursor(image, new Point(0,0), "Target");
+		Cursor cursor = toolkit.createCustomCursor(image, new Point(13,13), "Target");
 		contentPane.setCursor(cursor);
 
 		//Layered pane, to be able to display labels on top of each other
@@ -771,5 +776,8 @@ public class BackgroundPanel extends JFrame {
 		mainMenu = new JLabel(image);
 		mainMenu.setBounds(178, 350, image.getIconWidth(), image.getIconHeight());
 		mainMenu.setVisible(false);
+
+		if (dBg)
+			System.out.println("pictures are set.");
 	}
 } 
