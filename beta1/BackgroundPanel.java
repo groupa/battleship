@@ -199,7 +199,7 @@ public class BackgroundPanel extends JFrame {
 		layeredPane.add(BigInput, new Integer(2)); // also used in server list
 		//Credit screen
 		layeredPane.add(Credits, new Integer(2));
-		//	layeredPane.add(CreditText, new Integer(2));
+		layeredPane.add(CreditText, new Integer(2));
 		//player vs comp screen
 		layeredPane.add(Difficulty, new Integer(2));
 		layeredPane.add(Easy, new Integer(2));
@@ -410,6 +410,11 @@ public class BackgroundPanel extends JFrame {
 		Credits = new JLabel(image);
 		Credits.setBounds(293, 100, image.getIconWidth(), image.getIconHeight());
 		Credits.setVisible(false);
+		
+		image = new ImageIcon("img/creditstext.png");
+		CreditText = new JLabel(image);
+		CreditText.setBounds(10, 50, image.getIconWidth(), image.getIconHeight());
+		CreditText.setVisible(false);
 
 		//Player vs comp screen
 
@@ -535,7 +540,9 @@ public class BackgroundPanel extends JFrame {
 		BufferedImage source = null;
 		try {
 			source = ImageIO.read(input);
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		image = new ImageIcon("img/ship1.png");
 		ship1 = new JLabel(image);

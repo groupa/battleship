@@ -182,6 +182,7 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 	private void displayCredits() {
 		//true
 		Credits.setVisible(true);
+		CreditText.setVisible(true);
 		//false
 		StarshipBattleTextStart.setVisible(false);
 		BackgroundShip1.setVisible(false);
@@ -604,7 +605,7 @@ public class ScreenDisplayer extends BackgroundPanel implements MouseInputListen
 	 */
 	private void exit () {
 		try {
-			Thread.currentThread().sleep(5000);
+			Thread.currentThread().sleep(7000);
 		} 
 		catch (InterruptedException e) {
 			e.printStackTrace();
